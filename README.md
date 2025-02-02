@@ -7,7 +7,9 @@ This is a collection of reusable and customizable Vue 3 components and configura
 - Vue
 - Nuxt
 - Tailwind
+- Vueuse
 
 ## Features
 
 - **[ProximityScrollNav](./ProximityScrollNav)**: An interactive navigation component with scroll-based animations. Items scale and fade based on their proximity to a central selector, creating a smooth and engaging user experience.
+- **[VTyper](./VTyper)**: It simulates a typing effect, displaying an array of strings one by one with configurable typing speed, backspace speed, and loop behavior. It emits updates when text changes and includes a blinking cursor for a dynamic effect.
