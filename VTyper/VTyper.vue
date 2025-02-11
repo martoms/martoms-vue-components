@@ -1,7 +1,9 @@
 <template>
   <span class="whitespace-nowrap">
     {{ currentText }}
-    <span class="animate-blink font-normal"> |</span>
+    <span v-if="cursor && !hideCursor" class="animate-blink font-normal">
+      |</span
+    >
   </span>
 </template>
 
@@ -16,6 +18,7 @@ interface Props {
   delayBeforeStart?: number;
   loop?: boolean;
   cursor?: boolean;
+  hideCursorAfter?: boolean;
   backspace?: boolean;
 }
 
@@ -26,6 +29,7 @@ const {
   delayBeforeStart = 1000,
   loop = true,
   cursor = true,
+  hideCursorAfter = false,
   backspace = true,
 } = defineProps<Props>();
 
@@ -36,6 +40,7 @@ const emits = defineEmits<{
 const currentText = ref("");
 const currentIndex = ref(0);
 const currentStringIndex = ref(0);
+const hideCursor = ref(false);
 
 // Timeout for the initial delay
 const { start: startDelay, stop: stopDelay } = useTimeoutFn(
@@ -80,6 +85,7 @@ function typeText() {
     currentIndex.value++;
     startTyping();
   } else {
+    if (hideCursorAfter) hideCursor.value = true;
     emits("update", currentText.value);
     startPause();
   }
